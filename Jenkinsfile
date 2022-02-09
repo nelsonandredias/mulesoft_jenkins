@@ -27,6 +27,7 @@ pipeline {
             steps {
 				echo '###################### Deploying the Application ######################'
                 sh 'mvn --version'
+				 sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_CREDENTIALS_USR} -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW}'
             }
         }
 		stage('cleanup') {
