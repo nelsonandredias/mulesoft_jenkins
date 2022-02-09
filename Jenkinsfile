@@ -7,7 +7,7 @@ pipeline {
 			}
             steps {
 				echo '###################### Checking out the Application ######################'
-				echo '${ANYPOINT_CREDENTIALS_USR}'
+				sh  'echo ${ANYPOINT_CREDENTIALS_USR}'
                 sh 'mvn --version'
             }
         }
