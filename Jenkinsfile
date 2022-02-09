@@ -2,8 +2,12 @@ pipeline {
     agent any
     stages {
 		stage('checkout') {
+			environment {
+				ANYPOINT_CREDENTIALS = credentials('anypointplatform')
+			}
             steps {
 				echo '###################### Checking out the Application ######################'
+				echo '${ANYPOINT_CREDENTIALS_USR}'
                 sh 'mvn --version'
             }
         }

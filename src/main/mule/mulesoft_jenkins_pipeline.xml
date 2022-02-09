@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="helloWorld" doc:id="5afa7a61-4c7e-4c6e-9f93-509859dd4f02" >
+		<http:listener doc:name="Listener" doc:id="6f16f295-e7c9-4a00-b73c-bd2a11a7a82e" config-ref="HTTP_Listener_config" path="/hello/{ID}" />
+		<logger level="INFO" doc:name="Log Start" doc:id="7fe138b4-9a50-4e7b-8b3d-3c3f908a6c85" />
+		<set-payload value='#[%dw 2.0&#10;&#10;output application/json&#10;---&#10;{&#10;	message: "Hello " ++ attributes.uriParams.ID as String	&#10;}]' doc:name="Set Payload" doc:id="c80d602e-1084-4112-bd37-a0d8c6aa7a1a" />
+		<logger level="INFO" doc:name="Log End" doc:id="8ae155ed-176e-4012-ade9-e2ac0df44fb6" />
+	</flow>
+</mule>
