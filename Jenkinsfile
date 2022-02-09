@@ -2,8 +2,8 @@ pipeline {
     agent any
 	environment {
 		ANYPOINT_CREDENTIALS = credentials('anypointplatform')
-		ANYPOINT_USER = ${ANYPOINT_CREDENTIALS_USR}
-		ANYPOINT_PASS = ${ANYPOINT_CREDENTIALS_PSW}
+		ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
+		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
 	}
     stages {
 		stage('checkout') {
