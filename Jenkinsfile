@@ -25,7 +25,7 @@ pipeline {
     stages {
 		stage ('launching'){
 			steps {
-				launching(${env.JOB_NAME}, ${env.BRANCH_NAME})
+				launching('${env.JOB_NAME}', '${env.BRANCH_NAME}')
 			}
 		}
 		stage('checkout') {
