@@ -37,9 +37,10 @@ pipeline {
 		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
 		MVN = "mvn"
         GIT = "git"
+		MULE_SETTINGS = 'C:\\Users\\NelsonDias\\.m2\\settings.xml'
 	}
     stages {
-		stage ('launching'){
+		stage ('initialize'){
 			steps {
 				echo logSeparator
 				log('Launching Pipeline')
@@ -71,30 +72,22 @@ pipeline {
 				echo logSeparator
 				log('Compile the Application')
 				
-                sh 'mvn compile'
+                sh "${MVN} clean compile"
 				echo logSeparator
             }
 		}
-        stage('build') {
-            steps {
-				echo logSeparator
-				log('Building the Application')
-                sh 'mvn --version'
-				echo logSeparator
-            }
-        }
 		stage('test') {
             steps {
 				echo logSeparator
 				log('Testing the Application')
-                sh 'mvn --version'
+                sh '${MVN} --version'
 				echo logSeparator
             }
         }
-		stage('package') {
+		stage('build') {
             steps {
 				echo logSeparator
-				log('Packaging the Application')
+				 sh "${MVN} clean install -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}"
                 sh 'mvn --version'
 				echo logSeparator
             }
