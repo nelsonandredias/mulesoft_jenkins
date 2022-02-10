@@ -10,16 +10,20 @@ pipeline {
     agent any
 	environment {
 		ANYPOINT_CREDENTIALS = credentials('anypointplatform')
-		ANYPOINT_USER = "$ANYPOINT_CREDENTIALS_USR"
-		ANYPOINT_PASS = "$ANYPOINT_CREDENTIALS_PSW"
+		ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
+		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
+	}
+	parameters {
+		THEJOB="${JOB_NAME.substring(JOB_NAME.lastIndexOf('/') + 1, JOB_NAME.length())}"
 	}
     stages {
 		stage('checkout') {
             steps {
 				echo logSeparator
 				log('Checking out the Application')
-				echo 'JobName ${env.JOB_NAME} running ${env.BUILD_ID} on ${env.JENKINS_URL}'
-				echo '$ANYPOINT_USER'
+				//echo 'JobName ${env.JOB_NAME} running ${env.BUILD_ID} on ${env.JENKINS_URL}'
+				echo '$THEJOB'
+				echo '${ANYPOINT_USER}'
                 sh 'mvn --version'
 				echo logSeparator
             }
