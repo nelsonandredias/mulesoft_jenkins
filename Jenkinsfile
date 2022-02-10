@@ -12,7 +12,7 @@ def logSeparator = '############################################################
 
 def log(String message)
 {
-    echo '############################ [ ${message} ]  ############################'
+    echo "############################ [ ${message} ]  ############################"
 }
 
 
@@ -41,7 +41,9 @@ pipeline {
 			steps {
 				echo logSeparator
 				log('Launching Pipeline')
-				launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit, gitpreviouscommit)
+				//launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit, gitpreviouscommit)
+				//print all variables
+				//sh 'printenv'
 			}
 		}
 		stage('checkout') {
@@ -57,7 +59,7 @@ pipeline {
 			steps {
 				echo logSeparator
 				log('Compile the Application')
-				sh 'printenv'
+				
                 sh 'mvn compile'
 				echo logSeparator
             }
