@@ -5,7 +5,7 @@ def log(String message)
 {
     echo "############################ [ ${message} ]  ############################"
 }
-
+echo "LAUNCHING: ${env.JOB_NAME}"
 pipeline {
     agent any
 	environment {
@@ -13,7 +13,6 @@ pipeline {
 		ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
 		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
 	}
-	echo "LAUNCHING: ${env.JOB_NAME}"
     stages {
 		stage('checkout') {
             steps {
