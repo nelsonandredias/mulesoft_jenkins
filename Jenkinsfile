@@ -1,10 +1,10 @@
 pipeline {
     agent any
-	environment {
-		ANYPOINT_CREDENTIALS = credentials('anypointplatform')
-		ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
-		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
-	}
+	//environment {
+	//	ANYPOINT_CREDENTIALS = credentials('anypointplatform')
+	//	ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
+	//	ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
+	//}
     stages {
 		stage('checkout') {
             steps {
@@ -40,7 +40,7 @@ pipeline {
             steps {
 				echo '###################### Deploying the Application ######################'
                 sh 'mvn --version'
-				 sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
+			//	 sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
             }
         }
 		stage('publish to artifact') {
