@@ -1,4 +1,4 @@
-def branch = env.JOB_NAME.split("_")[1].replaceAll("-", "/")
+def branch = env.JOB_NAME.split("_")[1].replaceAll("_", "/")
 
 def logSeparator = "###########################################################################################"
 
