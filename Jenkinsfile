@@ -50,7 +50,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Checking out the Application')
-				echo '${ANYPOINT_USER}'
+				echo "${ANYPOINT_USER}"
                 sh 'mvn --version'
 				echo logSeparator
             }
