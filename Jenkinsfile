@@ -96,8 +96,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Deploying the Application')
-                sh 'mvn --version'
-				// sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
+				//sh '${MVN} clean deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
 				 echo logSeparator
             }
         }
@@ -111,10 +110,22 @@ pipeline {
         }
 		stage('cleanup') {
             steps {
-				echo logSeparator
-				log('Cleaning up the Application')
-                sh 'mvn --version'
-				echo logSeparator
+				script {
+					echo logSeparator
+					log('Cleaning up the Application')
+                
+					/* clean up our workspace */
+					deleteDir()
+					/* clean up tmp directory */
+					dir("${workspace}@tmp") {
+						deleteDir()
+					}
+					/* clean up script directory */
+					dir("${workspace}@script") {
+						deleteDir()
+					}
+					echo logSeparator
+				}
             }
         }
     }
