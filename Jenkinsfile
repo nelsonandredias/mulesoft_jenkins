@@ -35,6 +35,8 @@ pipeline {
 		ANYPOINT_CREDENTIALS = credentials('anypointplatform')
 		ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
 		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
+		MVN = "mvn"
+        GIT = "git"
 	}
     stages {
 		stage ('launching'){
@@ -48,11 +50,20 @@ pipeline {
 		}
 		stage('checkout') {
             steps {
-				echo logSeparator
-				log('Checking out the Application')
-				echo "${ANYPOINT_USER}"
-                sh 'mvn --version'
-				echo logSeparator
+				script {
+					echo logSeparator
+					log('Checking out the Application')
+					checkout([
+						$class: 'GitSCM',
+						branches: scm.branches,
+						doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+						extensions: scm.extensions,
+						userRemoteConfigs: scm.userRemoteConfigs
+					])
+					sh "${GIT} status"
+					echo "Multi-branch set to: ${branch}"
+					echo logSeparator
+				}
             }
         }
 		stage('compile') {
