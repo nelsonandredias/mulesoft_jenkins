@@ -9,6 +9,7 @@ pipeline {
 		stage('checkout') {
             steps {
 				echo '###################### Checking out the Application ######################'
+				echo 'JobName ${env.JOB_NAME} running ${env.BUILD_ID} on ${env.JENKINS_URL}'
 				echo '${ANYPOINT_USER}'
                 sh 'mvn --version'
             }
