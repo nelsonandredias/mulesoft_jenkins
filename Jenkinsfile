@@ -13,9 +13,7 @@ pipeline {
 		ANYPOINT_USER = "${ANYPOINT_CREDENTIALS_USR}"
 		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
 	}
-	parameters {
-		THEJOB="${JOB_NAME.substring(JOB_NAME.lastIndexOf('/') + 1, JOB_NAME.length())}"
-	}
+	echo "LAUNCHING: ${env.JOB_NAME}"
     stages {
 		stage('checkout') {
             steps {
