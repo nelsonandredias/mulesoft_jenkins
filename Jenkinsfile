@@ -87,7 +87,7 @@ pipeline {
 		stage('build') {
             steps {
 				echo logSeparator
-				 sh "${MVN} clean install -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}"
+				 sh '${MVN} clean install -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
                 sh 'mvn --version'
 				echo logSeparator
             }
