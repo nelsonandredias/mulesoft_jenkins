@@ -1,4 +1,5 @@
 def branch = env.BRANCH_NAME
+def jobname = env.JOB_NAME
 
 def logSeparator = "###########################################################################################"
 
@@ -25,7 +26,7 @@ pipeline {
     stages {
 		stage ('launching'){
 			steps {
-				launching('${env.JOB_NAME}', '${env.BRANCH_NAME}')
+				launching(jobname, branch)
 			}
 		}
 		stage('checkout') {
