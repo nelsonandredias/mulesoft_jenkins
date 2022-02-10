@@ -1,19 +1,30 @@
 def branch = env.BRANCH_NAME
 def jobname = env.JOB_NAME
+def jenkinsurl = env.JENKINS_URL
+def buildid = env.BUILD_ID
+def buildnumber = env.BUILD_NUMBER
+def buildurl = env.BUILD_URL
+def mavenhome = env.MAVEN_HOME
+def gitcommit = env.GIT_COMMIT
 
-def logSeparator = "###########################################################################################"
+def logSeparator = '###########################################################################################'
 
 def log(String message)
 {
-    echo "############################ [ ${message} ]  ############################"
+    echo '############################ [ ${message} ]  ############################'
 }
-echo "LAUNCHING: ${env.JOB_NAME}"
-echo "LAUNCHING: ${branch}" 
 
-def launching(String JOB_NAME, String BRANCH)
+
+def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_ID, String BUILD_NUMBER, String BUILD_URL, String MAVEN_HOME, String GIT_COMMIT)
 {
-	echo "LAUNCHING: ${JOB_NAME}"
-	echo "LAUNCHING: ${BRANCH}" 
+	echo "JOB_NAME: ${JOB_NAME}"
+	echo "BRANCH: ${BRANCH}"
+	echo "JENKINS_URL: ${JENKINS_URL}"
+	echo "BUILD_ID: ${BUILD_ID}"
+	echo "BUILD_NUMBER: ${BUILD_NUMBER}"
+	echo "BUILD_URL: ${BUILD_URL}"
+	echo "MAVEN_HOME: ${MAVEN_HOME}"
+	echo "GIT_COMMIT: ${GIT_COMMIT}"
 }
 
 pipeline {
@@ -26,15 +37,15 @@ pipeline {
     stages {
 		stage ('launching'){
 			steps {
-				launching(jobname, branch)
+				echo logSeparator
+				log('Launching Pipeline')
+				launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit)
 			}
 		}
 		stage('checkout') {
             steps {
 				echo logSeparator
 				log('Checking out the Application')
-				//echo 'JobName ${env.JOB_NAME} running ${env.BUILD_ID} on ${env.JENKINS_URL}'
-				echo '$THEJOB'
 				echo '${ANYPOINT_USER}'
                 sh 'mvn --version'
 				echo logSeparator
