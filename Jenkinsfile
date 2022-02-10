@@ -1,5 +1,5 @@
 
-def logSeparator = "##########################################################################################"
+def logSeparator = "###########################################################################################"
 
 def log(String message)
 {
@@ -27,7 +27,7 @@ pipeline {
 		stage('compile') {
 			steps {
 				echo logSeparator
-				echo '###################### Compile the Application ######################'
+				log('Compile the Application')
                 sh 'mvn compile'
 				echo logSeparator
             }
@@ -35,7 +35,7 @@ pipeline {
         stage('build') {
             steps {
 				echo logSeparator
-				echo '###################### Building the Application ######################'
+				log('Building the Application')
                 sh 'mvn --version'
 				echo logSeparator
             }
@@ -43,7 +43,7 @@ pipeline {
 		stage('test') {
             steps {
 				echo logSeparator
-				echo '###################### Testing the Application ######################'
+				log('Testing the Application')
                 sh 'mvn --version'
 				echo logSeparator
             }
@@ -51,7 +51,7 @@ pipeline {
 		stage('package') {
             steps {
 				echo logSeparator
-				echo '###################### Packaging the Application ######################'
+				log('Packaging the Application')
                 sh 'mvn --version'
 				echo logSeparator
             }
@@ -59,7 +59,7 @@ pipeline {
 		stage('deploy') {
             steps {
 				echo logSeparator
-				echo '###################### Deploying the Application ######################'
+				log('Deploying the Application')
                 sh 'mvn --version'
 				// sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
 				 echo logSeparator
@@ -68,7 +68,7 @@ pipeline {
 		stage('publish to artifact') {
             steps {
 				echo logSeparator
-				echo '###################### Publishing the Application to Artifact ######################'
+				log('Publishing the Application to Artifact')
                 sh 'mvn --version'
 				echo logSeparator
             }
@@ -76,7 +76,7 @@ pipeline {
 		stage('cleanup') {
             steps {
 				echo logSeparator
-				echo '###################### Cleaning up the Application ######################'
+				log('Cleaning up the Application')
                 sh 'mvn --version'
 				echo logSeparator
             }
