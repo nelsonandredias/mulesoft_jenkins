@@ -61,7 +61,7 @@ pipeline {
 				echo logSeparator
 				echo '###################### Deploying the Application ######################'
                 sh 'mvn --version'
-				 sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
+				// sh 'mvn deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
 				 echo logSeparator
             }
         }
