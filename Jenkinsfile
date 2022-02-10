@@ -114,16 +114,16 @@ pipeline {
 					echo logSeparator
 					log('Cleaning up the Application')
                 
-					/* clean up our workspace */
-					deleteDir()
-					/* clean up tmp directory */
-					dir("${workspace}@tmp") {
-						deleteDir()
-					}
-					/* clean up script directory */
-					dir("${workspace}@script") {
-						deleteDir()
-					}
+					// clean up our workspace
+					//deleteDir()
+					// clean up tmp directory
+					//dir("${workspace}@tmp") {
+					//	deleteDir()
+					//}
+					// clean up script directory
+					//dir("${workspace}@script") {
+					//	deleteDir()
+					//}
 					echo logSeparator
 				}
             }
