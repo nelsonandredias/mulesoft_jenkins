@@ -1,4 +1,4 @@
-def branch = env.JOB_NAME.split("_")[1].replaceAll("_", "/")
+def branch = env.BRANCH_NAME
 
 def logSeparator = "###########################################################################################"
 
@@ -31,6 +31,7 @@ pipeline {
 			steps {
 				echo logSeparator
 				log('Compile the Application')
+				sh 'printenv'
                 sh 'mvn compile'
 				echo logSeparator
             }
