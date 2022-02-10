@@ -1,3 +1,4 @@
+def branch = env.JOB_NAME.split("_")[1].replaceAll("-", "/")
 
 def logSeparator = "###########################################################################################"
 
@@ -6,6 +7,7 @@ def log(String message)
     echo "############################ [ ${message} ]  ############################"
 }
 echo "LAUNCHING: ${env.JOB_NAME}"
+echo "LAUNCHING: branch"
 pipeline {
     agent any
 	environment {
