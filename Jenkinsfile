@@ -6,7 +6,7 @@ def buildnumber = env.BUILD_NUMBER
 def buildurl = env.BUILD_URL
 def mavenhome = env.MAVEN_HOME
 def gitcommit = env.GIT_COMMIT
-de gitpreviouscommit = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
+def gitpreviouscommit = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 
 def logSeparator = '###########################################################################################'
 
