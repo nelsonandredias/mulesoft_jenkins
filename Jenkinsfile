@@ -7,7 +7,7 @@ def log(String message)
     echo "############################ [ ${message} ]  ############################"
 }
 echo "LAUNCHING: ${env.JOB_NAME}"
-echo "LAUNCHING: branch"
+echo "LAUNCHING: ${branch}" 
 pipeline {
     agent any
 	environment {
