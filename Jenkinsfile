@@ -6,6 +6,7 @@ def buildnumber = env.BUILD_NUMBER
 def buildurl = env.BUILD_URL
 def mavenhome = env.MAVEN_HOME
 def gitcommit = env.GIT_COMMIT
+de gitpreviouscommit = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 
 def logSeparator = '###########################################################################################'
 
@@ -15,7 +16,7 @@ def log(String message)
 }
 
 
-def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_ID, String BUILD_NUMBER, String BUILD_URL, String MAVEN_HOME, String GIT_COMMIT)
+def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_ID, String BUILD_NUMBER, String BUILD_URL, String MAVEN_HOME, String GIT_COMMIT, String GIT_PREVIOUS_COMMIT)
 {
 	echo "JOB_NAME: ${JOB_NAME}"
 	echo "BRANCH: ${BRANCH}"
@@ -25,6 +26,7 @@ def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_I
 	echo "BUILD_URL: ${BUILD_URL}"
 	echo "MAVEN_HOME: ${MAVEN_HOME}"
 	echo "GIT_COMMIT: ${GIT_COMMIT}"
+	echo "GIT_PREVIOUS_COMMIT: ${GIT_PREVIOUS_COMMIT}"
 }
 
 pipeline {
@@ -39,7 +41,7 @@ pipeline {
 			steps {
 				echo logSeparator
 				log('Launching Pipeline')
-				launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit)
+				launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit, gitpreviouscommit)
 			}
 		}
 		stage('checkout') {
