@@ -8,6 +8,13 @@ def log(String message)
 }
 echo "LAUNCHING: ${env.JOB_NAME}"
 echo "LAUNCHING: ${branch}" 
+
+def launching(String JOB_NAME, String BRANCH)
+{
+	echo "LAUNCHING: ${JOB_NAME}"
+	echo "LAUNCHING: ${BRANCH}" 
+}
+
 pipeline {
     agent any
 	environment {
@@ -16,6 +23,11 @@ pipeline {
 		ANYPOINT_PASS = "${ANYPOINT_CREDENTIALS_PSW}"
 	}
     stages {
+		stage ('launching'){
+			steps {
+				launching(${env.JOB_NAME}, ${env.BRANCH_NAME})
+			}
+		}
 		stage('checkout') {
             steps {
 				echo logSeparator
