@@ -120,7 +120,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Deploying the Application')
-				sh '${MVN} clean deploy -DmuleDeploy -Pcloudhub -Denv=dev -DskipTests -Dch.workers=1 -Dch.workerType=MICRO -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+				//sh '${MVN} clean deploy -DmuleDeploy -Pcloudhub -Denv=dev -DskipTests -Dch.workers=1 -Dch.workerType=MICRO -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				 echo logSeparator
             }
         }
@@ -129,10 +129,18 @@ pipeline {
 				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'release'
             }
             steps {
-				echo logSeparator
-				log('Publishing the Application to Artifactory and Exchange')
-                sh 'mvn clean deploy -DskipTests -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
-				echo logSeparator
+				script {
+					pom = readMavenPom(file: 'pom.xml')
+					projectVersion = pom.getVersion()
+					projectArtifactId = pom.getArtifactId()
+					echo logSeparator
+					log('Publishing the Application to Artifactory and Exchange')
+					log (${projectArtifactId})
+					log (${projectVersion})
+					//sh 'mvn clean deploy -DskipTests -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+					echo logSeparator
+				}
+				
             }
         }
 		stage('cleanup') {
