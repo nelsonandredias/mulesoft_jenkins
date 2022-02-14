@@ -137,7 +137,7 @@ pipeline {
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Application to Artifactory and Exchange')
-					log(${projectVersion})
+					log(projectVersion)
 					try {
 						//You will need to change the credential confguration to fit your specific installation. Two examples are shown below.
 						//'github' is the Jenkins Credential Id created for the Git repository
