@@ -131,13 +131,14 @@ pipeline {
             steps {
 				script {
 					// to use the readMavenPom function please install the plugin 'pipeline-utility-steps'
+					//Then, Navigate to jenkins > Manage jenkins > In-process Script Approval: There is a pending command, which must be approved.
 					pom = readMavenPom(file: 'pom.xml')
 					projectVersion = pom.getVersion()
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Application to Artifactory and Exchange')
-					log (${projectArtifactId})
-					log (${projectVersion})
+					log (projectArtifactId)
+					log (projectVersion)
 					//sh 'mvn clean deploy -DskipTests -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 					echo logSeparator
 				}
