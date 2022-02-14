@@ -77,22 +77,43 @@ pipeline {
             }
 		}
 		stage('test') {
+			when {
+				allOf  {
+					environment ignoreCase: true, name: 'branch', value: 'develop'
+					environment ignoreCase: true, name: 'branch', value: 'release'
+					environment ignoreCase: true, name: 'branch', value: 'master'
+				}
+            }
             steps {
 				echo logSeparator
 				log('Testing the Application')
-                sh '${MVN} --version'
+                //sh '${MVN} clean test -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				echo logSeparator
             }
         }
 		stage('build') {
+			when {
+				allOf  {
+					environment ignoreCase: true, name: 'branch', value: 'develop'
+					environment ignoreCase: true, name: 'branch', value: 'release'
+					environment ignoreCase: true, name: 'branch', value: 'master'
+				}
+            }
             steps {
 				echo logSeparator
-				 sh '${MVN} clean install -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
-                sh 'mvn --version'
+				log('Build the Application')
+				//sh '${MVN} clean install -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				echo logSeparator
             }
         }
 		stage('deploy') {
+			when {
+				allOf  {
+					environment ignoreCase: true, name: 'branch', value: 'develop'
+					environment ignoreCase: true, name: 'branch', value: 'release'
+					environment ignoreCase: true, name: 'branch', value: 'master'
+				}
+            }
             steps {
 				echo logSeparator
 				log('Deploying the Application')
@@ -101,10 +122,17 @@ pipeline {
             }
         }
 		stage('publish to artifact') {
+			when {
+				allOf  {
+					environment ignoreCase: true, name: 'branch', value: 'develop'
+					environment ignoreCase: true, name: 'branch', value: 'release'
+					environment ignoreCase: true, name: 'branch', value: 'master'
+				}
+            }
             steps {
 				echo logSeparator
 				log('Publishing the Application to Artifact')
-                sh 'mvn --version'
+                //sh 'mvn --version'
 				echo logSeparator
             }
         }
