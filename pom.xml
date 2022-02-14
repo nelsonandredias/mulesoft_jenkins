@@ -130,6 +130,35 @@
 				</plugins>
 			</build>
 		</profile>
+		
+		<profile>
+			<id>artifact-repo</id>
+			<distributionManagement>
+				<repository>
+					<id>corporate-artifact-repository</id>
+					<name>Corporate Artifact Repository</name>
+					<url>${corporate-artifact-repository-url}</url>
+					<layout>default</layout>
+				</repository>
+			</distributionManagement>
+		</profile>
+
+		<profile>
+			<id>exchange</id>
+			<distributionManagement>
+				<repository>
+					<id>my-organization-exchange-repository</id>
+					<name>Corporate Repository</name>
+					<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${groupId}/maven</url>
+					<layout>default</layout>
+				</repository>
+				<snapshotRepository>
+					<id>my-organization-exchange-repository</id>
+					<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${groupId}/maven</url>
+					<layout>default</layout>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
 	</profiles>
 
 	<repositories>
@@ -159,18 +188,6 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<distributionManagement>
-		<repository>
-			<id>my-organization-exchange-repository</id>
-			<name>Corporate Repository</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${groupId}/maven</url>
-			<layout>default</layout>
-		</repository>
-		<snapshotRepository>
-			<id>my-organization-exchange-repository</id>
-			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${groupId}/maven</url>
-			<layout>default</layout>
-		</snapshotRepository>
-	</distributionManagement>
+
 
 </project>
