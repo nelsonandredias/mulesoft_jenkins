@@ -130,6 +130,7 @@ pipeline {
             }
             steps {
 				script {
+					// to use the readMavenPom function please install the plugin 'pipeline-utility-steps'
 					pom = readMavenPom(file: 'pom.xml')
 					projectVersion = pom.getVersion()
 					projectArtifactId = pom.getArtifactId()
