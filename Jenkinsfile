@@ -132,15 +132,15 @@ pipeline {
 				not{ 
 					anyOf {
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'develop'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
 					}
 				}
             }
             steps {
 				echo logSeparator
-				log('Publishing the Application to Artifact')
-                //sh 'mvn --version'
+				log('Publishing the Application to Artifactory and Exchange')
+                sh 'mvn clean deploy -DskipTests -Pmy-organization-exchange-repository -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				echo logSeparator
             }
         }
