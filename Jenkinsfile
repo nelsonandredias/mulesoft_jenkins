@@ -68,6 +68,15 @@ pipeline {
             }
         }
 		stage('compile') {
+			when {
+				not{ 
+					anyOf {
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'develop'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
+					}
+				}
+            }
 			steps {
 				echo logSeparator
 				log('Compile the Application')
@@ -95,13 +104,7 @@ pipeline {
         }
 		stage('build') {
 			when {
-				not{ 
-					anyOf {
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
-					}
-				}
+				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'develop'
             }
             steps {
 				echo logSeparator
@@ -112,13 +115,7 @@ pipeline {
         }
 		stage('deploy') {
 			when {
-				not{ 
-					anyOf {
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
-					}
-				}
+				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'develop'
             }
             steps {
 				echo logSeparator
@@ -129,13 +126,7 @@ pipeline {
         }
 		stage('publish to artifact') {
 			when {
-				not{ 
-					anyOf {
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'develop'
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
-					}
-				}
+				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'release'
             }
             steps {
 				echo logSeparator
