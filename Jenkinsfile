@@ -89,31 +89,35 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Testing the Application')
-                //sh '${MVN} clean test -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+                sh '${MVN} clean test -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				echo logSeparator
             }
         }
 		stage('build') {
 			when {
-				allOf  {
-					environment ignoreCase: true, name: 'branch', value: 'develop'
-					environment ignoreCase: true, name: 'branch', value: 'release'
-					environment ignoreCase: true, name: 'branch', value: 'master'
+				not{ 
+					anyOf {
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'test'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
+					}
 				}
             }
             steps {
 				echo logSeparator
 				log('Build the Application')
-				//sh '${MVN} clean install -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+				sh '${MVN} clean install -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				echo logSeparator
             }
         }
 		stage('deploy') {
 			when {
-				allOf  {
-					environment ignoreCase: true, name: 'branch', value: 'develop'
-					environment ignoreCase: true, name: 'branch', value: 'release'
-					environment ignoreCase: true, name: 'branch', value: 'master'
+				not{ 
+					anyOf {
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'test'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
+					}
 				}
             }
             steps {
@@ -125,10 +129,12 @@ pipeline {
         }
 		stage('publish to artifact') {
 			when {
-				allOf  {
-					environment ignoreCase: true, name: 'branch', value: 'develop'
-					environment ignoreCase: true, name: 'branch', value: 'release'
-					environment ignoreCase: true, name: 'branch', value: 'master'
+				not{ 
+					anyOf {
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'test'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
+					}
 				}
             }
             steps {
