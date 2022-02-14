@@ -87,7 +87,7 @@ pipeline {
 		stage('build') {
             steps {
 				echo logSeparator
-				 sh '${MVN} clean install -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+				 sh '${MVN} clean install -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
                 sh 'mvn --version'
 				echo logSeparator
             }
@@ -96,7 +96,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Deploying the Application')
-				//sh '${MVN} clean deploy -DmuleDeploy -Danypoint.username=${ANYPOINT_USER} -Danypoint.password=${ANYPOINT_PASS}'
+				//sh '${MVN} clean deploy -DmuleDeploy -Denv=dev -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS}'
 				 echo logSeparator
             }
         }
