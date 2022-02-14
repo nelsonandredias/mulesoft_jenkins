@@ -137,7 +137,6 @@ pipeline {
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Application to Artifactory and Exchange')
-					log(projectVersion)
 					try {
 						//You will need to change the credential confguration to fit your specific installation. Two examples are shown below.
 						//'github' is the Jenkins Credential Id created for the Git repository
@@ -146,7 +145,7 @@ pipeline {
 							credentialsId: 'github', 
 							usernameVariable: 'GIT_USERNAME', 
 							passwordVariable: 'GIT_PASSWORD']]) {
-							sh '${GIT} tag jenkins-${projectVersion}'
+							sh '${GIT} tag jenkins-$projectVersion'
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'" 
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
