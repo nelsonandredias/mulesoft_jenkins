@@ -78,7 +78,7 @@ pipeline {
 		}
 		stage('test') {
 			when {
-				allOf  {
+				anyOf  {
 					environment ignoreCase: true, name: 'branch', value: 'develop'
 					environment ignoreCase: true, name: 'branch', value: 'release'
 					environment ignoreCase: true, name: 'branch', value: 'master'
