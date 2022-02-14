@@ -123,7 +123,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Deploying the Application')
-				//sh '${MVN} clean deploy -DmuleDeploy -Denv=dev -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS}'
+				sh '${MVN} clean deploy -DmuleDeploy -Pcloudhub -Denv=dev -DskipTests -Dch.workers=1 -Dch.workerType=MICRO -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				 echo logSeparator
             }
         }
