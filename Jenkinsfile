@@ -44,7 +44,7 @@ pipeline {
 			steps {
 				echo logSeparator
 				log('Launching Pipeline')
-				//launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit, gitpreviouscommit)
+				launching(jobname, branch, jenkinsurl, buildid, buildnumber, buildurl, mavenhome, gitcommit, gitpreviouscommit)
 				//print all variables
 				//sh 'printenv'
 			}
@@ -97,7 +97,7 @@ pipeline {
 			when {
 				not{ 
 					anyOf {
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: '^feature.*$'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
 					}
@@ -114,7 +114,7 @@ pipeline {
 			when {
 				not{ 
 					anyOf {
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: '^feature.*$'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'release'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
 					}
@@ -131,7 +131,7 @@ pipeline {
 			when {
 				not{ 
 					anyOf {
-						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'feature'
+						environment ignoreCase: true, name: 'BRANCH_NAME', value: '^feature.*$'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'develop'
 						environment ignoreCase: true, name: 'BRANCH_NAME', value: 'master'
 					}
@@ -140,7 +140,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Publishing the Application to Artifactory and Exchange')
-                sh 'mvn clean deploy -DskipTests -Pmy-organization-exchange-repository -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+                sh 'mvn clean deploy -DskipTests -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 				echo logSeparator
             }
         }
