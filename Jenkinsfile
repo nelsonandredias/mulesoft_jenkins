@@ -145,7 +145,7 @@ pipeline {
 							credentialsId: 'github', 
 							usernameVariable: 'GIT_USERNAME', 
 							passwordVariable: 'GIT_PASSWORD']]) {
-							sh '${GIT} tag jenkins-$projectVersion'
+							sh '${GIT} tag jenkins-${projectVersion}'
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'" 
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
