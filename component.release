@@ -24,11 +24,11 @@ def abort(String message)
 
 def deploy(String artifactId, String groupId, String version, String targetEnvironment, deploymentModel, String workers, String workerSize, String usr, String pwd, String settingsFile) {
 
-	sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":pom -DoutputDirectory=./ -B -Du=" + usr + " -Dp=" + pwd + " -s " + settingsFile
+	sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":pom -DoutputDirectory=./ -B -DanypointUsername=" + usr + " -DanypointPassword=" + pwd + " --settings " + settingsFile
 	sh "${RENAME} " + artifactId + "-" + version + ".pom pom.xml"
 	
 	if (deploymentModel.equalsIgnoreCase("CloudHub")) {
- 	    sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":jar:mule-application -DoutputDirectory=./ -B -Du=" + usr + " -Dp=" + pwd + " -s " + settingsFile
+ 	    sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":jar:mule-application -DoutputDirectory=./ -B -DanypointUsername=" + usr + " -DanypointPassword=" + pwd + " --settings " + settingsFile
         deployCloudHub( groupId,  artifactId,  version,  targetEnvironment,  workers, workerSize,  usr,  pwd,  settingsFile)
 	} else {
         error('Unknown deployment Model: ' + deploymentModel)
