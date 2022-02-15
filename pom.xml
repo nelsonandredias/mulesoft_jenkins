@@ -161,7 +161,7 @@
 		</profile>
 	</profiles>
 
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>anypoint-exchange-v2</id>
 			<name>Anypoint Exchange</name>
@@ -185,7 +185,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories>-->
 
 
 
