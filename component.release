@@ -43,8 +43,8 @@ pipeline {
 agent  any
  
     parameters {
-		string (name: 'groupId', defaultValue: '50228d0d-2c1f-4548-9c8a-90c0ebb480b3', trim: true, description: 'The Anypoint groupId (is required). The organization Id from Access Management')
-		string (name: 'applicationName', defaultValue: 'mulesoft_jenkins', trim: true, description: 'The Git repository name (is required).')
+		string (name: 'groupId', defaultValue: '044ea400-38f3-422d-ab3a-da4292f70632', trim: true, description: 'The Anypoint groupId (is required). The organization Id from Access Management')
+		string (name: 'artifactoryId', defaultValue: 'mulesoft_jenkins', trim: true, description: 'The Git repository name (is required).')
 		choice (name: 'targetEnvironment', choices: ['dev', 'acc', 'prd'], description: 'Deploy to environment')
 		choice (name: 'deploymentType', choices: ['CloudHub'], description: 'Type of deployment')
 		choice (name: 'workers', choices: ['1', '2', '3', '4', '5', '6', '7', '8'], description: 'Number of workers or instances')
@@ -100,7 +100,7 @@ stages {
 		steps {
 			script {
 				dir ("deploy") {
-				deploy("${applicationName}", "${groupId}", tag_response, "${targetEnvironment}", "${deploymentType}", "${workers}", "${workerSize}", "${ANYPOINT_USER}", "${ANYPOINT_PASS}", "${muleSettings}")
+				deploy("${artifactoryId}", "${groupId}", tag_response, "${targetEnvironment}", "${deploymentType}", "${workers}", "${workerSize}", "${ANYPOINT_USER}", "${ANYPOINT_PASS}", "${muleSettings}")
 				}
 			}
 		}
