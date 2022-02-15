@@ -29,7 +29,7 @@ def deploy(String artifactId, String version, String targetEnvironment, deployme
 	
 	if (deploymentModel.equalsIgnoreCase("CloudHub")) {
  	    sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":jar:mule-application -DoutputDirectory=./ -B -Du=" + usr + " -Dp=" + pwd + " -s " + settingsFile
-        deployCloudHub( groupId,  artifactId,  version,  targetEnvironment,  'workers, workerSize,  usr,  pwd,  settingsFile)
+        deployCloudHub( groupId,  artifactId,  version,  targetEnvironment,  workers, workerSize,  usr,  pwd,  settingsFile)
 	} else {
         error('Unknown deployment Model: ' + deploymentModel)
 	}	
