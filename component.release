@@ -78,7 +78,7 @@ stages {
 						extensions: [[$class: 'WipeWorkspace']],
                         submoduleCfg: [],
                         gitTool: 'Default',
-                        userRemoteConfigs: [[credentialsId: 'GitCredentials', url: '${sshGitURL}']]]
+                        userRemoteConfigs: [[credentialsId: 'github', url: '${sshGitURL}']]]
 				sh "${GIT} status"
 				echo logSeparator
 			}
