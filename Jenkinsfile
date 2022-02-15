@@ -183,7 +183,7 @@ pipeline {
             }
         }
     }
-	/*post {
+	post {
         // Clean after build
         always {
             echo logSeparator
@@ -201,5 +201,5 @@ pipeline {
 					}
 					echo logSeparator
         }
-    }*/
+    }
 }
