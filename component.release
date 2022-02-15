@@ -22,7 +22,7 @@ def abort(String message)
     error(message)
 }
 
-def deploy(String artifactId, String version, String targetEnvironment, deploymentModel, String workers, String workerSize, String usr, String pwd, String settingsFile) {
+def deploy(String artifactId, String groupId, String version, String targetEnvironment, deploymentModel, String workers, String workerSize, String usr, String pwd, String settingsFile) {
 
 	sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":pom -DoutputDirectory=./ -B -Du=" + usr + " -Dp=" + pwd + " -s " + settingsFile
 	sh "${RENAME} " + artifactId + "-" + version + ".pom pom.xml"
@@ -43,13 +43,14 @@ pipeline {
 agent  any
  
     parameters {
-      string (name: 'applicationName', defaultValue: 'mulesoft_jenkins', trim: true, description: 'The Git repository name (is required).')
-      choice (name: 'targetEnvironment', choices: ['dev', 'acc', 'prd'], description: 'Deploy to environment')
-      choice (name: 'deploymentType', choices: ['CloudHub'], description: 'Type of deployment')
-      choice (name: 'workers', choices: ['1', '2', '3', '4', '5', '6', '7', '8'], description: 'Number of workers or instances')
-      choice (name: 'workerSize', choices: ['MICRO', 'SMALL', 'MEDIUM', 'LARGE', 'XLARGE', 'XXLARGE', '4XLARGE'], description: 'Type of deployment')
-      string (name: 'muleSettings', defaultValue: '/opt/maven/settings/np-settings.xml', trim: true, description: 'The settings.xml file to use for deployments (is required).')
-      string (name: 'httpsGitURL', defaultValue: 'https://github.com/nelsonandredias/mulesoft_jenkins.git', trim: true, description: 'The https Git url used to checkout source code (is required).')
+		string (name: 'groupId', defaultValue: '50228d0d-2c1f-4548-9c8a-90c0ebb480b3', trim: true, description: 'The Anypoint groupId (is required).')
+		string (name: 'applicationName', defaultValue: 'mulesoft_jenkins', trim: true, description: 'The Git repository name (is required).')
+		choice (name: 'targetEnvironment', choices: ['dev', 'acc', 'prd'], description: 'Deploy to environment')
+		choice (name: 'deploymentType', choices: ['CloudHub'], description: 'Type of deployment')
+		choice (name: 'workers', choices: ['1', '2', '3', '4', '5', '6', '7', '8'], description: 'Number of workers or instances')
+		choice (name: 'workerSize', choices: ['MICRO', 'SMALL', 'MEDIUM', 'LARGE', 'XLARGE', 'XXLARGE', '4XLARGE'], description: 'Type of deployment')
+		string (name: 'muleSettings', defaultValue: '/opt/maven/settings/np-settings.xml', trim: true, description: 'The settings.xml file to use for deployments (is required).')
+		string (name: 'httpsGitURL', defaultValue: 'https://github.com/nelsonandredias/mulesoft_jenkins.git', trim: true, description: 'The https Git url used to checkout source code (is required).')
     }
 
     environment {
@@ -99,7 +100,7 @@ stages {
 		steps {
 			script {
 				dir ("deploy") {
-				deploy("${applicationName}", tag_response, "${targetEnvironment}", "${deploymentType}", "${workers}", "${workerSize}", "${ANYPOINT_USER}", "${ANYPOINT_PASS}", "${muleSettings}")
+				deploy("${applicationName}", "${groupId}", tag_response, "${targetEnvironment}", "${deploymentType}", "${workers}", "${workerSize}", "${ANYPOINT_USER}", "${ANYPOINT_PASS}", "${muleSettings}")
 				}
 			}
 		}
