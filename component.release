@@ -49,7 +49,7 @@ agent  any
       choice (name: 'workers', choices: ['1', '2', '3', '4', '5', '6', '7', '8'], description: 'Number of workers or instances')
       choice (name: 'workerSize', choices: ['MICRO', 'SMALL', 'MEDIUM', 'LARGE', 'XLARGE', 'XXLARGE', '4XLARGE'], description: 'Type of deployment')
       string (name: 'muleSettings', defaultValue: '/opt/maven/settings/np-settings.xml', trim: true, description: 'The settings.xml file to use for deployments (is required).')
-      string (name: 'sshGitURL', defaultValue: 'git@github.com:nelsonandredias/mulesoft_jenkins.git', trim: true, description: 'The SSH Git url used to checkout source code (is required).')
+      string (name: 'httpsGitURL', defaultValue: 'https://github.com/nelsonandredias/mulesoft_jenkins.git', trim: true, description: 'The https Git url used to checkout source code (is required).')
     }
 
     environment {
@@ -78,7 +78,7 @@ stages {
 						extensions: [[$class: 'WipeWorkspace']],
                         submoduleCfg: [],
                         gitTool: 'Default',
-                        userRemoteConfigs: [[credentialsId: 'github', url: '${sshGitURL}']]]
+                        userRemoteConfigs: [[credentialsId: 'github', url: '${httpsGitURL}']]]
 				sh "${GIT} status"
 				echo logSeparator
 			}
