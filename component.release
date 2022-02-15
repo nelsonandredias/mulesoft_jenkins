@@ -43,7 +43,7 @@ pipeline {
 agent  any
  
     parameters {
-		string (name: 'groupId', defaultValue: '50228d0d-2c1f-4548-9c8a-90c0ebb480b3', trim: true, description: 'The Anypoint groupId (is required). It's the organization Id from Access Management')
+		string (name: 'groupId', defaultValue: '50228d0d-2c1f-4548-9c8a-90c0ebb480b3', trim: true, description: 'The Anypoint groupId (is required). The organization Id from Access Management')
 		string (name: 'applicationName', defaultValue: 'mulesoft_jenkins', trim: true, description: 'The Git repository name (is required).')
 		choice (name: 'targetEnvironment', choices: ['dev', 'acc', 'prd'], description: 'Deploy to environment')
 		choice (name: 'deploymentType', choices: ['CloudHub'], description: 'Type of deployment')
