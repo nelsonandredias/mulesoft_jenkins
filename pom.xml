@@ -6,7 +6,7 @@
 
 	<groupId>044ea400-38f3-422d-ab3a-da4292f70632</groupId>
 	<artifactId>mule-jenkins-pipeline</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
 	<name>mule-jenkins-pipeline</name>
