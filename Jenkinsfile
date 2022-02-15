@@ -147,7 +147,8 @@ pipeline {
 							passwordVariable: 'GIT_PASSWORD']]) {
 							sh "${GIT} tag ${projectVersion}"
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
-							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'" 
+							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
+							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
                     } finally {
@@ -182,7 +183,7 @@ pipeline {
             }
         }
     }
-	post {
+	/*post {
         // Clean after build
         always {
             echo logSeparator
@@ -200,5 +201,5 @@ pipeline {
 					}
 					echo logSeparator
         }
-    }
+    }*/
 }
