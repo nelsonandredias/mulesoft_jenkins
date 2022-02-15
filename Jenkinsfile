@@ -124,7 +124,7 @@ pipeline {
 				 echo logSeparator
             }
         }
-		stage('publish snapshot') {
+		stage('generate tag and publish to exchange') {
 			when {
 				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'develop'
             }
@@ -137,43 +137,6 @@ pipeline {
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Application Snapshot to Artifactory and Exchange')
-					try {
-						//You will need to change the credential confguration to fit your specific installation. Two examples are shown below.
-						//'github' is the Jenkins Credential Id created for the Git repository
-						//withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'GIT_KEY_FILE', passphraseVariable: 'GIT_PASSPHRASE', usernameVariable: 'GIT_USERNAME')]) {
-						withCredentials([[$class: 'UsernamePasswordMultiBinding', 
-							credentialsId: 'github', 
-							usernameVariable: 'GIT_USERNAME', 
-							passwordVariable: 'GIT_PASSWORD']]) {
-							sh "${GIT} tag ${projectVersion}"
-							sh '${GIT} config credential.username ${GIT_USERNAME}' 
-							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'" 
-							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
-						}
-                    } finally {
-                        sh '${GIT} config --unset credential.username'
-                        sh '${GIT} config --unset credential.helper'
-                    }
-					
-					//sh 'mvn clean deploy -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
-					echo logSeparator
-				}
-				
-            }
-        }
-		stage('publish release version') {
-			when {
-				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'release'
-            }
-            steps {
-				script {
-					// to use the readMavenPom function please install the plugin 'pipeline-utility-steps'
-					//Then, Navigate to jenkins > Manage jenkins > In-process Script Approval: There is a pending command, which must be approved.
-					pom = readMavenPom(file: 'pom.xml')
-					projectVersion = pom.getVersion()
-					projectArtifactId = pom.getArtifactId()
-					echo logSeparator
-					log('Publishing the Application to Artifactory and Exchange')
 					try {
 						//You will need to change the credential confguration to fit your specific installation. Two examples are shown below.
 						//'github' is the Jenkins Credential Id created for the Git repository
