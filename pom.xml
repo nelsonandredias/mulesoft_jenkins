@@ -155,7 +155,6 @@
 				<snapshotRepository>
 					<id>my-organization-exchange-repository</id>
 					<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${groupId}/maven</url>
-					<uniqueVersion>false</uniqueVersion>
 					<layout>default</layout>
 				</snapshotRepository>
 			</distributionManagement>
