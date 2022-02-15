@@ -29,13 +29,14 @@ def deploy(String artifactId, String groupId, String version, String targetEnvir
 	
 	if (deploymentModel.equalsIgnoreCase("CloudHub")) {
  	    sh "${MVN} dependency:copy -Dartifact=" + groupId + ":" + artifactId + ":" + version + ":jar:mule-application -DoutputDirectory=./ -B -DanypointUsername=" + usr + " -DanypointPassword=" + pwd + " --settings " + settingsFile
-        deployCloudHub( groupId,  artifactId,  version,  targetEnvironment,  workers, workerSize,  usr,  pwd,  settingsFile)
+        deployCloudHub(artifactId,  version,  targetEnvironment,  workers, workerSize,  usr,  pwd,  settingsFile)
 	} else {
         error('Unknown deployment Model: ' + deploymentModel)
 	}	
 }
 
 def deployCloudHub(String artifactId, String version, String targetEnvironment, String workers, String workerSize, String usr, String pwd, String settingsFile) {
+	echo "Aborting pipeline..."
     sh "${MVN} mule:deploy -Dmule.artifact=" + artifactId + "-" + version + "-mule-application.jar -Pcloudhub -Denv=" + targetEnvironment + " -Dch.workers=" + workers + " -Dch.workerType=" + workerSize + " -DanypointUsername=" + usr + " -DanypointPassword=" + pwd + " --settings " + settingsFile
 }
 
