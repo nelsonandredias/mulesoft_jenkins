@@ -162,14 +162,14 @@ pipeline {
 							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
 							
 							//sh "${GIT} tag ${projectVersion}"
-							sh "${GIT} tag 1.0.0"
+							//sh "${GIT} tag 1.0.0"
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
 							
-							//tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
-							//log(tags)
+							tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
+							log(tags)
 							
-							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
+							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
                     } finally {
                         sh '${GIT} config --unset credential.username'
