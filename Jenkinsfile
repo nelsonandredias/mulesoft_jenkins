@@ -40,7 +40,7 @@ def validateTags(String TAG){
 		lastTagNumber = TAG.substring(TAG.lastIndexOf("."), TAG.length())
 		//log("TAG.indexOf(".")")
 		//log("TAG.lastIndexOf(".")")
-		log("lastTagNumber")
+		log(lastTagNumber)
 	}
 	echo "outside condition"
 }
