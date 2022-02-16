@@ -186,7 +186,7 @@ pipeline {
 							
 							//tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
 							def tags = sh(returnStdout: true, script: "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1").trim()
-							tagVersion = validateTags(tags)
+							def tagVersion = validateTags(tags)
 							log(tagVersion)
 							sh "${GIT} tag tagVersion"
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
