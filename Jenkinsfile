@@ -43,10 +43,11 @@ def validateTags(String TAG){
 		log(firstTagNumber)
 		middleTagNumber = TAG.substring(TAG.indexOf(".")+1, TAG.lastIndexOf("."))
 		log(middleTagNumber)
-	}
-	String lastTagNumber = Integer.parseInt(lastTagNumber++)
+		String lastTagNumber = Integer.parseInt(lastTagNumber++)
 	echo "outside condition"
 	return firstTagNumber + '.' + middleTagNumber + '.' + lastTagNumber
+	}
+	
 
 }
 
