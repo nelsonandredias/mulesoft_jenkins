@@ -152,7 +152,7 @@ pipeline {
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Application Snapshot to Artifactory and Exchange')
-					//try {
+					try {
 						//You will need to change the credential confguration to fit your specific installation. Two examples are shown below.
 						//'github' is the Jenkins Credential Id created for the Git repository
 						//withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'GIT_KEY_FILE', passphraseVariable: 'GIT_PASSPHRASE', usernameVariable: 'GIT_USERNAME')]) {
@@ -164,7 +164,7 @@ pipeline {
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
 							
-							tags = sh(script: "${GIT} tag --sort=v:refname | tail -1 ", returnStdout: true).trim()
+							tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
 							log(tags)
 							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
 							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
