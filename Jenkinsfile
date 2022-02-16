@@ -148,10 +148,9 @@ pipeline {
 					//Then, Navigate to jenkins > Manage jenkins > In-process Script Approval: There is a pending command, which must be approved.
 					pom = readMavenPom(file: 'pom.xml')
 					projectVersion = pom.getVersion()
-					log(projectVersion)
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
-					log('Publishing the Application Snapshot to Artifactory and Exchange')
+					log('Publishing the Artifactory Release to Exchange')
 					try {
 						//You will need to change the credential confguration to fit your specific installation. Two examples are shown below.
 						//'github' is the Jenkins Credential Id created for the Git repository
@@ -160,13 +159,16 @@ pipeline {
 							credentialsId: 'github', 
 							usernameVariable: 'GIT_USERNAME', 
 							passwordVariable: 'GIT_PASSWORD']]) {
-							sh "${GIT} tag ${projectVersion}"
+							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
+							
+							//sh "${GIT} tag ${projectVersion}"
+							sh "${GIT} tag -a 1.0.0"
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
 							
-							tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
-							log(tags)
-							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
+							//tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
+							//log(tags)
+							
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
                     } finally {
