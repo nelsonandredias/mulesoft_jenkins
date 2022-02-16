@@ -196,7 +196,7 @@ pipeline {
                         sh '${GIT} config --unset credential.helper'
                     }
 					
-					sh '''mvn clean install deploy -Dproject.Version=''' + ${tagVersion} + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
+					sh '''mvn clean install deploy -Dproject.Version=''' + tagVersion + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 					echo logSeparator
 				}
 				
