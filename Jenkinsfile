@@ -190,14 +190,15 @@ pipeline {
 							log(tagVersion)
 							sh "${GIT} tag ${tagVersion}"
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
+							sh '''mvn clean install deploy -Dproject.Version=''' + tagVersion + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
+							echo logSeparator
 						}
                     } finally {
                         sh '${GIT} config --unset credential.username'
                         sh '${GIT} config --unset credential.helper'
                     }
 					
-					sh '''mvn clean install deploy -Dproject.Version=''' + $tagVersion + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
-					echo logSeparator
+					
 				}
 				
             }
