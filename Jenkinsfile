@@ -168,6 +168,11 @@ pipeline {
 							
 							tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
 							log(tags)
+							if (tags){
+								lastTagNumber = tags.substring(tags.lastIndexOf("."),-1)
+								log(lastTagNumber)
+							}else {
+							}
 							
 							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
