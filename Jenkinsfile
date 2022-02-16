@@ -29,7 +29,7 @@ def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_I
 }
 
 def validateTags(String TAG){
-	echo "${TAG}"
+	echo "TAG: ${TAG}"
 	
 	if (${TAG}?.trim()){
 		//lastTagNumber = tags.substring(tags.length - tags.lastIndexOf("."))
@@ -181,7 +181,6 @@ pipeline {
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
 							
 							tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
-							log(tags)
 							tagVersion = validateTags(tags)
 							
 							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
