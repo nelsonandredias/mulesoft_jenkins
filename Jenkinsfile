@@ -38,12 +38,8 @@ def validateTags(String TAG){
 	}else {
 		echo "the string is NOT null or empty."
 		lastTagNumber = (TAG.substring(TAG.lastIndexOf(".") + 1, TAG.length())).toInteger() +1
-		log(lastTagNumber.toString())
 		firstTagNumber = TAG.substring(0, TAG.indexOf("."))
-		log(firstTagNumber)
 		middleTagNumber = TAG.substring(TAG.indexOf(".")+1, TAG.lastIndexOf("."))
-		log(middleTagNumber)
-		echo "outside condition"
 		return firstTagNumber + '.' + middleTagNumber + '.' + lastTagNumber.toString()
 	}
 	
@@ -192,7 +188,8 @@ pipeline {
 							def tags = sh(returnStdout: true, script: "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1").trim()
 							tagVersion = validateTags(tags)
 							log(tagVersion)
-							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
+							sh "${GIT} tag tagVersion"
+							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
                     } finally {
                         sh '${GIT} config --unset credential.username'
