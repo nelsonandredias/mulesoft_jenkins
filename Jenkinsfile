@@ -28,6 +28,20 @@ def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_I
 	echo "GIT_PREVIOUS_COMMIT: ${GIT_PREVIOUS_COMMIT}"
 }
 
+def validateTags(String TAG){
+	echo "${TAG}"
+	
+	if (${TAG}?.trim()){
+		//lastTagNumber = tags.substring(tags.length - tags.lastIndexOf("."))
+		//log(tags.lastIndexOf("."))
+		//log(lastTagNumber)
+		echo "the string is NOT null or empty."
+	}else {
+		echo "the string is null or empty."
+	}
+	return "1.1.1"
+}
+
 pipeline {
     agent any
 	environment {
@@ -168,13 +182,7 @@ pipeline {
 							
 							tags = sh "GIT_ASKPASS=true ${GIT} tag  | grep -E '^[0-9]' | sort -V | tail -1"
 							log(tags)
-							if (tags!=null){
-								lastTagNumber = tags.substring(tags.length - tags.lastIndexOf("."))
-								log(tags.lastIndexOf("."))
-								log(lastTagNumber)
-							}else {
-								log('Do nothing')
-							}
+							tagVersion = validateTags(tags)
 							
 							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
