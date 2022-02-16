@@ -37,10 +37,14 @@ def validateTags(String TAG){
 		
 	}else {
 		echo "the string is NOT null or empty."
-		lastTagNumber = TAG.substring(TAG.lastIndexOf("."), TAG.length())
+		lastTagNumber = TAG.substring(TAG.lastIndexOf(".") + 1, TAG.length())
 		//log("TAG.indexOf(".")")
 		//log("TAG.lastIndexOf(".")")
 		log(lastTagNumber)
+		firstTagNumber = TAG.substring(0, TAG.indexOf("."))
+		log(firstTagNumber)
+		middleTagNumber = TAG.substring(TAG.indexOf(".")+1, TAG.lastIndexOf("."))
+		log(middleTagNumber)
 	}
 	echo "outside condition"
 }
