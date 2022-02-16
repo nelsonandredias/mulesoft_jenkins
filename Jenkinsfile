@@ -139,7 +139,7 @@ pipeline {
 					echo logSeparator
 					log('Publishing the Artifactory Snapshot to Exchange')
 					
-					sh '''mvn clean install deploy -DbuildNumber=''' + buildnumber + ''' + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
+					sh '''mvn clean install deploy -DbuildNumber=''' + buildnumber + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 					echo logSeparator
 				}
 				
