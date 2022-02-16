@@ -45,7 +45,7 @@ def validateTags(String TAG){
 		log(middleTagNumber)
 	}
 	echo "outside condition"
-	return firstTagNumber + '.' + middleTagNumber + '.' + lastTagNumber++
+	return firstTagNumber + '.' + middleTagNumber + '.' + lastTagNumber.netxt()
 
 }
 
