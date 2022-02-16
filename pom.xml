@@ -15,7 +15,7 @@
 		
 		<buildNumber>1</buildNumber>
 		<changeList>-SNAPSHOT</changeList>
-		<revision>1.0.0.${buildNumber}${changeList}</revision>
+		<revision>1.0.${buildNumber}${changeList}</revision>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
