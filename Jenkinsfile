@@ -138,7 +138,7 @@ pipeline {
 					echo logSeparator
 					log('Publishing the Artifactory Snapshot to Exchange')
 					
-					sh 'mvn clean install deploy -Drevision=2.0.0-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+					sh "mvn clean install deploy -Drevision=2.0." + ${buildnumber} + "0-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}"
 					echo logSeparator
 				}
 				
