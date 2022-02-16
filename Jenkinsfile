@@ -168,15 +168,15 @@ pipeline {
 							sh "${GIT} tag ${projectVersion}"
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
-							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
-							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
+							//sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
+							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 						}
                     } finally {
                         sh '${GIT} config --unset credential.username'
                         sh '${GIT} config --unset credential.helper'
                     }
 					
-					sh 'mvn clean install deploy -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+					//sh 'mvn clean install deploy -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
 					echo logSeparator
 				}
 				
