@@ -173,7 +173,7 @@ pipeline {
 								log(tags.lastIndexOf("."))
 								log(lastTagNumber)
 							}else {
-								log)('Do nothing')
+								log('Do nothing')
 							}
 							
 							//sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
