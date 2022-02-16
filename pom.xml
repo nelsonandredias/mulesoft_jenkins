@@ -13,7 +13,7 @@
 
 	<properties>
 		
-		<buildNumber>1</buildNumber>
+		<buildNumber>2</buildNumber>
 		<changeList>-SNAPSHOT</changeList>
 		<revision>1.0.${buildNumber}${changeList}</revision>
 		
