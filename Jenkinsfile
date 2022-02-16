@@ -124,9 +124,29 @@ pipeline {
 				 echo logSeparator
             }
         }
-		stage('generate tag and publish to exchange') {
+		stage('publish snapshot') {
 			when {
 				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'develop'
+            }
+            steps {
+				script {
+					// to use the readMavenPom function please install the plugin 'pipeline-utility-steps'
+					//Then, Navigate to jenkins > Manage jenkins > In-process Script Approval: There is a pending command, which must be approved.
+					pom = readMavenPom(file: 'pom.xml')
+					projectVersion = pom.getVersion()
+					projectArtifactId = pom.getArtifactId()
+					echo logSeparator
+					log('Publishing the Artifactory Snapshot to Exchange')
+					
+					sh 'mvn clean install deploy -Drevision=2.0.0-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+					echo logSeparator
+				}
+				
+            }
+        }
+		stage('generate tag and publish release') {
+			when {
+				environment ignoreCase: false, name: 'BRANCH_NAME', value: 'release'
             }
             steps {
 				script {
