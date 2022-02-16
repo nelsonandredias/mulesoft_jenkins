@@ -162,7 +162,7 @@ pipeline {
 							sh 'GIT_ASKPASS=true ${GIT} pull origin --tags'
 							
 							//sh "${GIT} tag ${projectVersion}"
-							sh "${GIT} tag -a 1.0.0"
+							sh "${GIT} tag 1.0.0"
 							sh '${GIT} config credential.username ${GIT_USERNAME}' 
 							sh "${GIT} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
 							
