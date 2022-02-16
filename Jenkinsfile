@@ -190,7 +190,7 @@ pipeline {
 							log(tagVersion)
 							sh "${GIT} tag ${tagVersion}"
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
-							sh '''mvn clean install deploy -Dproject.Version=''' + tagVersion + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
+							sh '''mvn clean install deploy -Dproject.Version=''' + tagVersion + ''' -DchangeList=''  -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 							echo logSeparator
 						}
                     } finally {
