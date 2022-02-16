@@ -6,13 +6,16 @@
 
 	<groupId>044ea400-38f3-422d-ab3a-da4292f70632</groupId>
 	<artifactId>mule-jenkins-pipeline</artifactId>
-	<version>1.0.${buildNumber}-SNAPSHOT</version>
+	<version>${revision}</version>
 	<packaging>mule-application</packaging>
 
 	<name>mule-jenkins-pipeline</name>
 
 	<properties>
-	
+		
+		<buildNumber>1</buildNumber>
+		<revision>1.0.${buildNumber}-SNAPSHOT</revision>
+		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
