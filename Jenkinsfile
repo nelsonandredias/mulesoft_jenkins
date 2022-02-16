@@ -15,7 +15,6 @@ def log(String message)
     echo "############################ [ ${message} ]  ############################"
 }
 
-
 def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_ID, String BUILD_NUMBER, String BUILD_URL, String MAVEN_HOME, String GIT_COMMIT, String GIT_PREVIOUS_COMMIT)
 {
 	echo "JOB_NAME: ${JOB_NAME}"
@@ -130,16 +129,10 @@ pipeline {
             }
             steps {
 				script {
-					// to use the readMavenPom function please install the plugin 'pipeline-utility-steps'
-					//Then, Navigate to jenkins > Manage jenkins > In-process Script Approval: There is a pending command, which must be approved.
-					pom = readMavenPom(file: 'pom.xml')
-					projectVersion = pom.getVersion()
-					log (projectVersion)
-					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Artifactory Snapshot to Exchange')
 					
-					sh '''mvn clean install deploy -DbuildNumber=''' + buildnumber + ''' -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
+					sh '''mvn clean install deploy -DbuildNumber=''' + buildnumber + ''' -DchangeList=-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 					echo logSeparator
 				}
 				
