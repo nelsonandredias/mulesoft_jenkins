@@ -38,7 +38,7 @@ def validateTags(String TAG){
 	}else {
 		echo "the string is NOT null or empty."
 		lastTagNumber = (TAG.substring(TAG.lastIndexOf(".") + 1, TAG.length())).toInteger() +1
-		log(lastTagNumber)
+		log(lastTagNumber.toString())
 		firstTagNumber = TAG.substring(0, TAG.indexOf("."))
 		log(firstTagNumber)
 		middleTagNumber = TAG.substring(TAG.indexOf(".")+1, TAG.lastIndexOf("."))
