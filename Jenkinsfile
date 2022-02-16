@@ -134,11 +134,12 @@ pipeline {
 					//Then, Navigate to jenkins > Manage jenkins > In-process Script Approval: There is a pending command, which must be approved.
 					pom = readMavenPom(file: 'pom.xml')
 					projectVersion = pom.getVersion()
+					log (projectVersion)
 					projectArtifactId = pom.getArtifactId()
 					echo logSeparator
 					log('Publishing the Artifactory Snapshot to Exchange')
 					
-					sh '''mvn clean install deploy -Drevision=2.0.''' + buildnumber + '''-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings + ${MULE_SETTINGS}'''
+					sh '''mvn clean install deploy -Drevision=2.0.''' + buildnumber + '''-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 					echo logSeparator
 				}
 				
