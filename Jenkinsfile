@@ -32,15 +32,15 @@ def validateTags(String TAG){
 	echo "TAG: ${TAG}"
 	
 	if (!TAG?.trim()){
-		lastTagNumber = TAG.substring(TAG.length - TAG.lastIndexOf("."))
-		log("TAG.indexOf(".")")
-		log("TAG.lastIndexOf(".")")
-		log("lastTagNumber")
 		
 		echo "the string is null or empty."
 		
 	}else {
 		echo "the string is NOT null or empty."
+		lastTagNumber = TAG.substring(TAG.length - TAG.lastIndexOf("."))
+		log("TAG.indexOf(".")")
+		log("TAG.lastIndexOf(".")")
+		log("lastTagNumber")
 	}
 	echo "outside condition"
 }
