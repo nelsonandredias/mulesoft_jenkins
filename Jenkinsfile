@@ -31,15 +31,16 @@ def launching(String JOB_NAME, String BRANCH, String JENKINS_URL, String BUILD_I
 def validateTags(String TAG){
 	echo "TAG: ${TAG}"
 	
-	if (${TAG}?.trim()){
+	if (!${TAG}?.trim()){
 		//lastTagNumber = tags.substring(tags.length - tags.lastIndexOf("."))
 		//log(tags.lastIndexOf("."))
 		//log(lastTagNumber)
-		echo "the string is NOT null or empty."
-	}else {
 		echo "the string is null or empty."
+		
+	}else {
+		echo "the string is NOT null or empty."
 	}
-	return "1.1.1"
+	echo "outside condition"
 }
 
 pipeline {
