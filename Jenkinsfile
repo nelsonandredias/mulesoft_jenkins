@@ -137,7 +137,7 @@ pipeline {
             steps {
 				echo logSeparator
 				log('Deploying the Application')
-				//sh '${MVN} clean deploy -DmuleDeploy -Pcloudhub -Denv=dev -DskipTests -Dch.workers=1 -Dch.workerType=MICRO -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'
+				sh '''${MVN} clean deploy -DmuleDeploy -DbuildNumber=''' + buildnumber + ''' -DchangeList=-SNAPSHOT -Pcloudhub -Denv=dev -DskipTests -Dch.workers=1 -Dch.workerType=MICRO -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 				 echo logSeparator
             }
         }
@@ -150,7 +150,7 @@ pipeline {
 					echo logSeparator
 					log('Publishing the Artifactory Snapshot to Exchange')
 					
-					//sh '''mvn clean install deploy -DbuildNumber=''' + buildnumber + ''' -DchangeList=-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
+					sh '''${MVN} clean install deploy -DbuildNumber=''' + buildnumber + ''' -DchangeList=-SNAPSHOT -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 					echo logSeparator
 				}
 				
