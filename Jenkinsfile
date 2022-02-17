@@ -191,7 +191,7 @@ pipeline {
 							sh "${GIT} tag ${tagVersion}"
 							sh 'GIT_ASKPASS=true ${GIT} push origin --tags'
 							def lastTagNumber = tagVersion.substring(tagVersion.lastIndexOf(".") + 1, tagVersion.length())
-							sh "${MVN} versions:update-property -Dproperty=buildNumber -DnewVersion=" + lastTagNumber + " --settings " + settingsFile
+							sh "${MVN} versions:update-property -Dproperty=buildNumber -DnewVersion=" + lastTagNumber
 							sh '''${MVN} clean install deploy -DbuildNumber=''' + lastTagNumber + ''' -DchangeList=''  -Pexchange -DanypointUsername=${ANYPOINT_USER} -DanypointPassword=${ANYPOINT_PASS} --settings ${MULE_SETTINGS}'''
 							echo logSeparator
 						}
