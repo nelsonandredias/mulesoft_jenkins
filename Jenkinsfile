@@ -205,7 +205,7 @@ pipeline {
 				
             }
         }
-		/*stage('cleanup') {
+		stage('cleanup') {
             steps {
 				script {
 					echo logSeparator
@@ -224,9 +224,9 @@ pipeline {
 					echo logSeparator
 				}
             }
-        }*/
+        }
     }
-	/*post {
+	post {
         // Clean after build
         always {
             echo logSeparator
@@ -244,5 +244,5 @@ pipeline {
 					}
 					echo logSeparator
         }
-    }*/
+    }
 }
